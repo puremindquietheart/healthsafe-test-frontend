@@ -5,16 +5,19 @@ import {
   } from '@ant-design/icons';
 import { Space } from 'antd';
 
-const Header = () => {
+const Header = ({ params }) => {
+
+  const {title, isHome} = params
+
   return (
     <div>
-        <h1>Shopping Cart</h1>
-        <Space>
-            <Link to="/manage-cart"> <ShoppingCartOutlined/> </Link>
-        </Space>
-        <br/>
-        <span>View Cart</span>
-
+        <h1>{title}</h1>
+        {isHome && (
+          <Space>
+            <Link to="/manage-cart"> <ShoppingCartOutlined/> View Cart </Link>
+          </Space>
+        )}
+        
     </div>
   )
 }

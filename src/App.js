@@ -7,9 +7,6 @@ import {
 } from '@ant-design/icons';
 // load header component
 import Header from './components/Header'
-// load swal
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 // load react helpers
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
@@ -29,8 +26,6 @@ const App = () => {
     search:""
   });
 
-  const MySwal = withReactContent(Swal)
-
   const onSearch = (value) => {
 
     pagination.search = value;
@@ -40,49 +35,6 @@ const App = () => {
       pagination:pagination
     });
     
-  }
-
-  const addToCart = (rowData) => {
-
-    if (!window.localStorage.getItem("CART_ITEMS")) {
-
-      let cartItems = [];
-
-      let obj = {...rowData, quantity:1}; 
-      cartItems.push(obj)
-
-      window.localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems))
-
-    } else {
-      let getCartItems = window.localStorage.getItem("CART_ITEMS")
-      const itemExists = getCartItems.some(item => item.id === rowData.id);
-
-      console.log(itemExists)
-    }
-    // console.log(console.log(localStorage));
-    // return false;
-    // let getCartItems = window.localStorage.getItem("CART_ITEMS")
-    // console.log(getCartItems);
-    // return false;
-    // if (getCartItems.length === 0) {
-
-      // let cartItems = [];
-
-      // let obj = {...rowData, quantity:1}; 
-      // cartItems.push(obj)
-
-      // window.localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems))
-
-    // } else {
-
-    //   let getCartItems = JSON.parse(getCartItems)
-    //   console.log(getCartItems)
-    //   // const itemExists = getCartItems.some(item => item.id === rowData.id);
-
-    //   // console.log(itemExists)
-
-    //   // console.log(JSON.parse(getCartItems));
-    // }
   }
 
   const fetchData = (params = {}) => {
@@ -133,21 +85,20 @@ const App = () => {
       title: 'Action',
       dataIndex: 'id',
       key: '3',
-      render: (text, record) => (
-        <PlusCircleOutlined onClick={()=> addToCart(record)} style={{ cursor: 'pointer' }} title="Add to Cart" />
-      )
+      render: (text, record) => <Link to="/add-to-cart" title='Click to add this product to your cart.' state={{rowData:record, from:window.location.href}} className="link-add"> <PlusCircleOutlined/> </Link> 
     },
   ]
 
   return (
     <div className="App">
-      <Header />
+      <Header params={{title:"Shopping Cart", isHome:true}} />
       <Search
         placeholder="Search by product name"
         allowClear
         onSearch={onSearch}
         style={{
           width: 350,
+          textAlign:'center'
         }}
       />
       <Table
