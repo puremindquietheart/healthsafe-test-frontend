@@ -37,6 +37,9 @@
   }
 }
 
+.link-default {
+  color: #808080;
+}
 .link-add {
   color: #00FF00;
 }
@@ -48,4 +51,13 @@
 }
 .link:hover {
    color: #00F
+}
+
+tr.strikeout td:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-bottom: 1px solid #111;
+  width: 100%;
 }

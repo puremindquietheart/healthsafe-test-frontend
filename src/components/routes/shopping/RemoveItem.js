@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useLocation } from 'react-router-dom'
   // load swal
 import Swal from 'sweetalert2'
@@ -50,8 +50,7 @@ const RemoveItem = () => {
     })
 
     return (
-        <main>
-        </main>
+        <Fragment></Fragment>
     )
 }
 

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
   // load swal
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 const AddToCart = () => {
+
+    let navigate = useNavigate();
 
     let isNew = false;
     const MySwal = withReactContent(Swal)
@@ -65,7 +67,7 @@ const AddToCart = () => {
             icon: 'success',
             text:isNew ? 'New product is added to your cart' : `Product: ${rowData.name} quantity is updated.`
         }).then(() => {
-            window.location = from
+            navigate(-1)
         })
     })
 
